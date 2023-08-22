@@ -66,6 +66,10 @@
   <form id="form" action="">
     <input id="input" autocomplete="off" /><button>Send</button>
   </form>
+  <script type="module">
+    import { io } from 'https://cdn.socket.io/4.4.1/socket.io.esm.min.js';
+    const socket = io();
+    console.log("🚀 ~ file: index.html:72 ~ socket:", socket)
+  </script>
 </body>
-
 </html>
