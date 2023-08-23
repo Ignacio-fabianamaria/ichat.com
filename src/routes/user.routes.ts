@@ -6,9 +6,10 @@ class UserRoutes{
     private userController = new UserController();
     constructor(){
         this.router = Router();
+        this.getRoutes();
     }
     getRoutes(){
-        this.router.post('/users', this.userController.store)
+        this.router.post('/', this.userController.store)
     }
 }
 export{UserRoutes}
