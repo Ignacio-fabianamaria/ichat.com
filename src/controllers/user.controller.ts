@@ -1,10 +1,16 @@
 import { NextFunction, Request, Response } from "express";
+import { Users } from "../useCases/user.userCase";
 
 class UserController {
-    store(req:Request, res:Response, next:NextFunction){
+    private usersUserCase: Users;
+    constructor(){
+        this.usersUserCase = new Users()
+    }
+   async store(req:Request, res:Response, next:NextFunction){
         const{name, email, password} = req.body;
         try {
-            return res.status(201).json({ok:true})
+            const result = await this.usersUserCase.create({name, email, password})
+            return res.status(201).json(result)
         } catch (error) {
             next(error)
         }

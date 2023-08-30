@@ -9,7 +9,7 @@ class UserRoutes{
         this.getRoutes();
     }
     getRoutes(){
-        this.router.post('/', this.userController.store)
+        this.router.post('/', this.userController.store.bind(this.userController))
     }
 }
 export{UserRoutes}

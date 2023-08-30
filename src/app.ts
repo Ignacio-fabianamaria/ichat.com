@@ -1,5 +1,5 @@
 import http from 'http';
-import express, { Application } from 'express';
+import express, { Application, NextFunction, Request, Response } from 'express';
 import { Server } from 'socket.io';
 import { UserRoutes } from './routes/user.routes';
 import { connect } from './infra/database';
@@ -19,6 +19,7 @@ class App {
     this.io = new Server(this.http);
     this.middlewaresInit();
     this.initRoutes();
+    this.interceptionError();
     this.initHtml();
   }
 
@@ -50,6 +51,14 @@ class App {
   private middlewaresInit() {
     this.app.use(express.json())
     this.app.use(express.urlencoded({ extended: true }))
+  }
+  private interceptionError(){
+    this.app.use((err: Error, req:Request, res:Response, next:NextFunction)=>{
+      if(err instanceof Error){
+        return res.status(400).json({message: err.message})
+      }
+      return res.status(500).json({message: 'Internal Server Error'})
+    })
   }
 }
 
