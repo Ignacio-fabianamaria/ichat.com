@@ -8,7 +8,7 @@ class UsersRepository {
    }
 
    async findUserByEmail({email}:IEmail){
-    const result =  await UsersModel.find({email});
+    const result =  await UsersModel.findOne({email});
     return result;
     }
 }

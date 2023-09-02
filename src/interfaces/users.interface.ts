@@ -7,3 +7,8 @@ export interface ICreate {
 export interface IEmail {
     email: string
 }
+
+export interface IAuth {
+    email:string
+    password:string
+}

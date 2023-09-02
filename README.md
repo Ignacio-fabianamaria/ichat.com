@@ -12,6 +12,10 @@
 - npx tsc --init
 - npm install bcrypt
 - npm install @types/bcrypt --save-dev
+- npm install jsonwebtoken
+- npm install jsonwebtoken @types/jsonwebtoken
+
+
 
 </details>
 
@@ -21,8 +25,8 @@
 
 ### Registro de usuário:
 
-- O sistema deve permitir que novos usuários se cadastrem fornecendo nome, email e senha.
-- O sistema deve verificar se o email fornecido pelo usuário é válido e único.
+- [x] O sistema deve permitir que novos usuários se cadastrem fornecendo nome, email e senha.
+- [x] O sistema deve verificar se o email fornecido pelo usuário é válido e único.
 
 ### Autenticação e Login:
 
@@ -47,13 +51,13 @@
   
 ### Autenticação:
   
-- Apenas usuários registrados podem acessar o sistema.
+- [x] Apenas usuários registrados podem acessar o sistema.
 - As credenciais de login devem ser autenticadas antes de permitir o acesso.
 
 ### Registro:
 
-- O email fornecido durante o registro deve ser válido e único para cada usuário.
-- O sistema não deve permitir registros duplicados com o mesmo email.
+- [x] O email fornecido durante o registro deve ser válido e único para cada usuário.
+- [x] O sistema não deve permitir registros duplicados com o mesmo email.
 
 </details>
 

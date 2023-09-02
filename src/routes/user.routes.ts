@@ -9,7 +9,8 @@ class UserRoutes{
         this.getRoutes();
     }
     getRoutes(){
-        this.router.post('/', this.userController.store.bind(this.userController))
+        this.router.post('/', this.userController.store.bind(this.userController));
+        this.router.post('/auth', this.userController.auth.bind(this.userController))
     }
 }
 export{UserRoutes}
