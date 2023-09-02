@@ -3,7 +3,8 @@ import express, { Application, NextFunction, Request, Response } from 'express';
 import { Server } from 'socket.io';
 import { UserRoutes } from './routes/user.routes';
 import { connect } from './infra/database';
-import dotenv from 'dotenv'
+import dotenv from 'dotenv';
+import fs from 'fs';
 
 const PORT = 3333;
 dotenv.config();
@@ -51,6 +52,7 @@ class App {
   private middlewaresInit() {
     this.app.use(express.json())
     this.app.use(express.urlencoded({ extended: true }))
+    fs.accessSync('.env', fs.constants.F_OK)
   }
   private interceptionError(){
     this.app.use((err: Error, req:Request, res:Response, next:NextFunction)=>{
