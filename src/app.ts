@@ -5,6 +5,7 @@ import { UserRoutes } from './routes/user.routes';
 import { connect } from './infra/database';
 import dotenv from 'dotenv';
 import fs from 'fs';
+import { errorMiddleware } from './middlewares/error.middleware';
 
 const PORT = 3333;
 dotenv.config();
@@ -55,12 +56,7 @@ class App {
     fs.accessSync('.env', fs.constants.F_OK)
   }
   private interceptionError(){
-    this.app.use((err: Error, req:Request, res:Response, next:NextFunction)=>{
-      if(err instanceof Error){
-        return res.status(400).json({message: err.message})
-      }
-      return res.status(500).json({message: 'Internal Server Error'})
-    })
+    this.app.use(errorMiddleware)
   }
 }
 

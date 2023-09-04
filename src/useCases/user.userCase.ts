@@ -2,6 +2,7 @@ import { sign } from "jsonwebtoken";
 import { IAuth, ICreate } from "../interfaces/users.interface";
 import { UsersRepository } from "../repositories/user.repository";
 import { compare, hash } from 'bcrypt';
+import { HttpException } from "../interfaces/HttpException";
 
 class Users {
   private usersRepository: UsersRepository;
@@ -11,7 +12,7 @@ class Users {
   async create({ name, email, password }: ICreate) {
     const findUser = await this.usersRepository.findUserByEmail({ email });
     if (findUser) {
-      throw new Error("User exists.");
+      throw new HttpException(400, "User exists.");
     }
     const hashPassword = await hash(password, 10)
     const result = await this.usersRepository.create({ name, email, password: hashPassword })
@@ -21,19 +22,19 @@ class Users {
   async auth({email, password}:IAuth){
     const findUser = await this.usersRepository.findUserByEmail({ email });
     if (!findUser) {
-      throw new Error("User exists.");
+      throw new HttpException(400,"User exists.");
     }
     const passwordMatch = await compare(password, findUser.password!)
 
     if(!passwordMatch){
-      throw new Error('User or password invalid');
+      throw new HttpException(400,'User or password invalid');
     }
     let secretKey = process.env.TOKEN_SECRET
     if(!process.env.TOKEN_SECRET){
-      throw new Error('TOKEN_SECRET not found');
+      throw new HttpException(498,'TOKEN_SECRET not found');
     }
     if(!secretKey){
-      throw new Error('There is not secret key');
+      throw new HttpException(498, 'There is not secret key');
     }
     const token = sign({
       name:findUser.name!, user_id:findUser.id!, email
