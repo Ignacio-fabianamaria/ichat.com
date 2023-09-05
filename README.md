@@ -30,8 +30,8 @@
 
 ### Autenticação e Login:
 
-- Os usuários registrados devem poder fazer login no sistema fornecendo seu email e senha.
-- O sistema deve autenticar as credenciais fornecidas e conceder acesso apenas aos usuários váidos.
+- [x] Os usuários registrados devem poder fazer login no sistema fornecendo seu email e senha.
+- [x] O sistema deve autenticar as credenciais fornecidas e conceder acesso apenas aos usuários váidos.
 
 ### Listagem de Pessoas:
 
