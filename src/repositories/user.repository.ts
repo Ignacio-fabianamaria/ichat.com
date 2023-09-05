@@ -1,5 +1,5 @@
 import { UsersModel } from "../infra/models/users.model"
-import { ICreate, IEmail } from "../interfaces/users.interface";
+import { ICreate, IEmail, IPagination } from "../interfaces/users.interface";
 
 class UsersRepository {
    async create({name, email, password}: ICreate){
@@ -10,6 +10,11 @@ class UsersRepository {
    async findUserByEmail({email}:IEmail){
     const result =  await UsersModel.findOne({email});
     return result;
+    }
+    async findAllUsers({pageNumber, pageSize}: IPagination){
+        const result = await UsersModel.find().skip((pageNumber -1) * pageSize).limit(pageSize).exec();
+        return result;
+
     }
 }
 export {UsersRepository}
