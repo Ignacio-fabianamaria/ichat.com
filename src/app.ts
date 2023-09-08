@@ -41,6 +41,12 @@ class App {
   listenSocket() {
     this.io.on('connection', (userSoket) => {
       console.log('a user connected');
+      userSoket.on('join_room', (room)=>{
+        userSoket.join(room);
+      })
+      userSoket.on('message', (data)=>{
+        userSoket.to(data.room.id).emit('room_message', data.message)
+      })
 
     })
   }
