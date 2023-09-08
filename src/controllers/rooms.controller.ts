@@ -17,6 +17,16 @@ class RoomsController {
             next(error)
         }
     }
+    async show(req:Request, res:Response, next:NextFunction){
+        const {email} = req.params;
+        const {user_id} = req
+        try {
+            const result = await this.roomsUserCase.find(email, user_id);
+            return res.status(200).json(result);
+        } catch (error) {
+            next(error)
+        }
+    }
    
 }
 export{RoomsController};

@@ -10,7 +10,8 @@ class RoomsRoutes{
         this.getRoutes();
     }
     getRoutes(){
-        this.router.post('/', authMiddleware, this.roomsController.store.bind(this.roomsController))
+        this.router.post('/', authMiddleware, this.roomsController.store.bind(this.roomsController));
+        this.router.get('/:email', authMiddleware, this.roomsController.show.bind(this.roomsController));
     }
 
 }
