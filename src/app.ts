@@ -7,6 +7,7 @@ import dotenv from 'dotenv';
 import fs from 'fs';
 import { errorMiddleware } from './middlewares/error.middleware';
 import { RoomsRoutes } from './routes/rooms.routes';
+import { MessageRoutes } from './routes/message.routes';
 
 const PORT = 3333;
 dotenv.config();
@@ -17,6 +18,7 @@ class App {
   private io: Server;
   private userRoutes = new UserRoutes();
   private roomsRoutes = new RoomsRoutes();
+  private messageRoutes = new MessageRoutes();
   constructor() {
     this.app = express();
     this.http = new http.Server(this.app);
@@ -58,6 +60,7 @@ class App {
   private initRoutes() {
     this.app.use('/users', this.userRoutes.router);
     this.app.use('/rooms', this.roomsRoutes.router);
+    this.app.use('/message', this.messageRoutes.router);
   }
   private middlewaresInit() {
     this.app.use(express.json())
