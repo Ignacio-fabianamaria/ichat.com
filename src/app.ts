@@ -47,7 +47,10 @@ class App {
         userSoket.join(room);
       })
       userSoket.on('message', (data)=>{
-        userSoket.to(data.room.id).emit('room_message', data.message)
+        console.log('chat', data);
+
+          userSoket.to(data.room_id).emit('room_message', data.message)
+          console.log("🚀 ~ file: app.ts:53 ~ App ~ userSoket.on ~ data.room.id:", data.room_id)
       })
 
     })

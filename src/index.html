@@ -70,7 +70,35 @@
     import { io } from 'https://cdn.socket.io/4.4.1/socket.io.esm.min.js';
     const socket = io();
     console.log("🚀 ~ file: index.html:72 ~ socket:", socket);
-    socket.emit('join_room', '64fb76af546ff7d1d2639b15')
+    const messageList = document.getElementById('messages');
+    const messageInput = document.getElementById('input');
+    const messageForm = document.getElementById('form');
+
+    messageForm.addEventListener('submit', (event)=> {
+      event.preventDefault();
+      const messageContent = messageInput.value.trim();
+      console.log("🚀 ~ file: index.html:80 ~ messageForm.addEventListener ~ messageContent:", messageContent)
+      if(messageContent){
+        socket.emit('message', {
+          room_id:'64fd005cb925433761799196',
+          message: messageContent,
+        })
+      }
+      messageInput.value = '';
+      const messageItem = document.createElement('li');
+      messageItem.textContent = messageContent;
+      messageList.appendChild(messageItem);
+    });
+
+    socket.on('room_message', (message)=> {
+      const messageItem = document.createElement('li');
+      messageItem.textContent = message;
+      messageList.appendChild(messageItem);
+    })
+
+    socket.on('connect',()=>{
+      socket.emit('join_room', '64fd005cb925433761799196');
+    })
   </script>
 </body>
 </html>
