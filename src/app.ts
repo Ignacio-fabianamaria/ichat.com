@@ -63,7 +63,7 @@ class App {
   private initRoutes() {
     this.app.use('/users', this.userRoutes.router);
     this.app.use('/rooms', this.roomsRoutes.router);
-    this.app.use('/message', this.messageRoutes.router);
+    this.app.use('/messages', this.messageRoutes.router);
   }
   private middlewaresInit() {
     this.app.use(express.json())

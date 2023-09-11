@@ -11,6 +11,7 @@ class MessageRoutes{
     }
     getRoutes(){
        this.router.post('/', authMiddleware, this.messageController.store.bind(this.messageController));
+       this.router.put('/', authMiddleware, this.messageController.updateViwe.bind(this.messageController))
     }
 
 }
