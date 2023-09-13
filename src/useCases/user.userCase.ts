@@ -51,5 +51,10 @@ class Users {
     return result;
 
   }
+  async upload(filename:string, user_id:string){
+    const result = await this.usersRepository.upload(filename, user_id);
+    return result;
+
+  }
 }
 export { Users };
